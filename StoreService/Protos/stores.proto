@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "StoreService";
+
+service GrpcStore {
+    rpc GetAllStores (GetAllRequest) returns (StoreResponse);
+}
+
+message GetAllRequest {}
+
+message GrpcStoreModel{
+    int32 storeId = 1;
+    string name = 2;
+    string address = 3;
+}
+
+message StoreResponse {
+    repeated GrpcStoreModel store = 1;
+}

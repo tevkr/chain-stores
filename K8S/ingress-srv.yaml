@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: pr-8-rksp.com
+      http:
+        paths:
+          - path: /api/stores
+            pathType: Prefix
+            backend:
+              service:
+                name: stores-clusterip-srv
+                port:
+                  number: 80
+          - path: /api/e/stores
+            pathType: Prefix
+            backend:
+              service:
+                name: employees-clusterip-srv
+                port:
+                  number: 80
+          - path: /api/p/stores
+            pathType: Prefix
+            backend:
+              service:
+                name: products-clusterip-srv
+                port:
+                  number: 80
